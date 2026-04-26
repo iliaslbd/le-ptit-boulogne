@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Le P'tit Boulogne — Bistrot & Brasserie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: #1E0F08; color: #F5EDD8; font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; overflow-x: hidden; }
+
+/* NAV */
+nav {
+position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+display: flex; justify-content: space-between; align-items: center;
+padding: 0 48px; height: 68px;
+background: rgba(30,15,8,.97);
+border-bottom: 1px solid rgba(212,137,26,.2);
+}
+.nav-logo { font-family: ‘Bebas Neue’, Impact, sans-serif; font-size: 22px; letter-spacing: 2px; color: #D4891A; }
+.nav-links { display: flex; gap: 40px; align-items: center; }
+.nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,237,216,.6); text-decoration: none; transition: color .2s; }
+.nav-links a:hover { color: #F5EDD8; }
+.nav-cta { padding: 10px 24px !important; border: 1px solid #D4891A !important; color: #D4891A !important; border-radius: 2px; }
+.nav-cta:hover { background: #D4891A !important; color: #1E0F08 !important; }
+
+/* HERO */
+.hero {
+height: 100vh; min-height: 640px;
+display: grid; place-items: center;
+background: #1E0F08;
+position: relative; overflow: hidden; padding-top: 68px;
+}
+.hero-bg {
+position: absolute; inset: 0;
+background:
+radial-gradient(ellipse 80% 60% at 50% 30%, rgba(192,57,43,.25) 0%, transparent 65%),
+radial-gradient(ellipse 60% 80% at 80% 80%, rgba(212,137,26,.12) 0%, transparent 55%),
+repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(245,237,216,.015) 2px, rgba(245,237,216,.015) 4px);
+}
+.hero::after {
+content: ‘’; position: absolute; inset: 0; pointer-events: none;
+background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.65) 100%);
+}
+.hero-inner { position: relative; z-index: 2; text-align: center; padding: 0 24px; }
+.hero-stamp {
+display: inline-flex; align-items: center; gap: 12px; margin-bottom: 32px;
+opacity: 0; animation: fadeUp .7s ease .1s forwards;
+}
+.hero-stamp::before, .hero-stamp::after { content: ‘’; display: block; width: 40px; height: 1px; background: #D4891A; }
+.hero-stamp span { font-size: 10px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: #D4891A; }
+.hero h1 {
+font-family: ‘Bebas Neue’, Impact, ‘Arial Narrow’, sans-serif;
+font-size: clamp(72px, 14vw, 160px); line-height: .9;
+color: #F5EDD8 !important;
+opacity: 0; animation: fadeUp .8s ease .25s forwards;
+}
+.hero h1 span { color: #C0392B !important; }
+.hero-tagline {
+font-family: ‘Lora’, Georgia, serif; font-style: italic;
+font-size: clamp(16px, 2.5vw, 22px); color: rgba(245,237,216,.6);
+margin-top: 20px; opacity: 0; animation: fadeUp .8s ease .4s forwards;
+}
+.hero-actions {
+display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+margin-top: 44px; opacity: 0; animation: fadeUp .8s ease .55s forwards;
+}
+.btn {
+display: inline-flex; align-items: center; gap: 10px;
+padding: 15px 40px; border-radius: 2px;
+font-family: ‘DM Sans’, sans-serif; font-size: 12px; font-weight: 500;
+letter-spacing: 2.5px; text-transform: uppercase; text-decoration: none; cursor: pointer;
+transition: all .22s;
+}
+.btn-primary { background: #C0392B; color: #fff; border: 2px solid #C0392B; }
+.btn-primary:hover { background: transparent; color: #C0392B; }
+.btn-ghost { background: transparent; color: #F5EDD8; border: 2px solid rgba(245,237,216,.35); }
+.btn-ghost:hover { border-color: #F5EDD8; }
+
+/* PROOF */
+.proof-strip {
+background: #1E0F08; padding: 36px 48px;
+display: flex; justify-content: center; gap: 72px; flex-wrap: wrap;
+border-top: 1px solid rgba(212,137,26,.15); border-bottom: 1px solid rgba(212,137,26,.15);
+}
+.proof-item { text-align: center; }
+.proof-num { font-family: ‘Bebas Neue’, Impact, sans-serif; font-size: 52px; color: #D4891A; display: block; line-height: 1; }
+.proof-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(245,237,216,.4); margin-top: 6px; }
+
+/* SECTION */
+.section { padding: 96px 48px; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+.eyebrow {
+font-size: 10px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: #D4891A;
+display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+}
+.eyebrow::after { content: ‘’; display: block; width: 32px; height: 1px; background: #D4891A; }
+.section-title { font-family: ‘Bebas Neue’, Impact, sans-serif; font-size: clamp(48px, 6vw, 80px); line-height: .95; color: #1E0F08; margin-bottom: 24px; }
+.section-title em { color: #C0392B; font-style: normal; }
+
+/* ABOUT */
+.about-section { background: #FBF7EF; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about-visual {
+position: relative; aspect-ratio: 4/5; border-radius: 2px; overflow: hidden;
+background: linear-gradient(135deg, #3A1F10, #1E0F08);
+display: flex; align-items: center; justify-content: center;
+}
+.about-emoji { font-size: 100px; }
+.about-badge {
+position: absolute; top: 24px; right: 24px; width: 80px; height: 80px; border-radius: 50%;
+background: #C0392B; display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.about-badge-num { font-family: ‘Bebas Neue’, Impact, sans-serif; font-size: 26px; color: #fff; line-height: 1; }
+.about-badge-text { font-size: 8px; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.7); }
+.about-visual-footer {
+position: absolute; bottom: 0; left: 0; right: 0; padding: 32px;
+background: linear-gradient(to top, rgba(30,15,8,.9) 0%, transparent 100%);
+}
+.about-visual-caption { font-family: ‘Lora’, Georgia, serif; font-style: italic; font-size: 14px; color: rgba(245,237,216,.7); }
+.about-content p { font-size: 15px; line-height: 1.8; color: #5c4535; margin-bottom: 16px; }
+.about-quote { margin-top: 32px; padding: 24px; border-left: 3px solid #D4891A; background: #F5EDD8; }
+.about-quote blockquote { font-family: ‘Lora’, Georgia, serif; font-style: italic; font-size: 17px; color: #1E0F08; line-height: 1.6; }
+.about-quote cite { display: block; margin-top: 10px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #9A8878; font-style: normal; }
+
+/* MENU */
+.menu-section { background: #1E0F08; }
+.menu-section .section-title { color: #F5EDD8; }
+.menu-tabs { display: flex; gap: 4px; margin-bottom: 48px; border-bottom: 1px solid rgba(245,237,216,.1); flex-wrap: wrap; }
+.tab {
+padding: 12px 24px 14px; cursor: pointer;
+font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+color: rgba(245,237,216,.4); background: transparent; border: none;
+border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all .2s;
+font-family: ‘DM Sans’, sans-serif;
+}
+.tab:hover { color: rgba(245,237,216,.8); }
+.tab.active { color: #D4891A; border-bottom-color: #D4891A; }
+.menu-list { display: flex; flex-direction: column; }
+.menu-row {
+display: flex; justify-content: space-between; align-items: baseline;
+padding: 20px 0; border-bottom: 1px solid rgba(245,237,216,.07);
+transition: padding .2s;
+}
+.menu-row:hover { padding-left: 12px; }
+.menu-row:last-child { border-bottom: none; }
+.menu-name { font-family: ‘Lora’, Georgia, serif; font-size: 19px; color: #F5EDD8; margin-bottom: 4px; }
+.menu-desc { font-size: 13px; color: rgba(245,237,216,.4); }
+.menu-dots {
+flex: 1; margin: 0 16px; height: 1px; align-self: flex-end; margin-bottom: 6px;
+background: repeating-linear-gradient(to right, rgba(245,237,216,.15) 0, rgba(245,237,216,.15) 4px, transparent 4px, transparent 8px);
+}
+.menu-price { font-family: ‘Bebas Neue’, Impact, sans-serif; font-size: 22px; color: #D4891A; white-space: nowrap; }
+
+/* TESTIMONIALS */
+.testimonials-section { background: #FBF7EF; }
+.testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+.testimonial-card {
+background: #fff; padding: 28px; border-radius: 2px;
+box-shadow: 0 2px 12px rgba(30,15,8,.08);
+position: relative; transition: transform .2s;
+}
+.testimonial-card:hover { transform: translateY(-4px); }
+.testimonial-stars { color: #D4891A; font-size: 13px; letter-spacing: 2px; margin-bottom: 16px; }
+.testimonial-text { font-family: ‘Lora’, Georgia, serif; font-style: italic; font-size: 15px; line-height: 1.7; color: #2C1810; margin-bottom: 20px; }
+.testimonial-author { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #9A8878; }
+.testimonial-card::before { content: ‘\201C’; position: absolute; top: 16px; right: 24px; font-family: ‘Lora’, Georgia, serif; font-size: 80px; color: #E8DCC8; line-height: 1; }
+
+/* HOURS */
+.hours-band { background: #C0392B; padding: 60px 48px; }
+.hours-inner { display: flex; align-items: center; justify-content: space-between; gap: 48px; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; }
+.hours-title { font-family: ‘Bebas Neue’, Impact, sans-serif; font-size: 48px; color: #fff; }
+.hours-grid { display: flex; gap: 40px; flex-wrap: wrap; }
+.hours-item { text-align: center; }
+.hours-day { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 6px; }
+.hours-time { font-family: ‘Bebas Neue’, Impact, sans-serif; font-size: 20px; color: #fff; line-height: 1.4; }
+.hours-time.closed { color: rgba(255,255,255,.35); font-size: 18px; }
+
+/* CONTACT */
+.contact-section { background: #F5EDD8; }
+.contact-big { text-align: center; max-width: 700px; margin: 0 auto; }
+.contact-big p { font-size: 16px; line-height: 1.7; color: #9A8878; margin-bottom: 48px; }
+.contact-buttons { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.btn-call {
+display: flex; align-items: center; justify-content: center;
+width: 100%; max-width: 420px; padding: 22px 40px;
+background: #1E0F08; color: #F5EDD8;
+border-radius: 4px; text-decoration: none;
+transition: all .2s; box-shadow: 0 8px 40px rgba(30,15,8,.18);
+}
+.btn-call:hover { background: #C0392B; transform: translateY(-2px); }
+.btn-call-label { font-family: ‘DM Sans’, sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #D4891A; display: block; margin-bottom: 6px; }
+.btn-call-num { font-family: ‘Bebas Neue’, Impact, sans-serif; font-size: 32px; letter-spacing: 2px; }
+.btn-order {
+display: flex; align-items: center; justify-content: center;
+width: 100%; max-width: 420px; padding: 22px 40px;
+background: #D4891A; color: #1E0F08;
+border-radius: 4px; text-decoration: none;
+transition: all .2s; box-shadow: 0 8px 40px rgba(30,15,8,.18);
+}
+.btn-order:hover { background: #b8730f; transform: translateY(-2px); }
+.btn-order-label { font-family: ‘DM Sans’, sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(30,15,8,.6); display: block; margin-bottom: 6px; }
+.btn-order-num { font-family: ‘Bebas Neue’, Impact, sans-serif; font-size: 32px; letter-spacing: 2px; }
+.btn-whatsapp {
+display: flex; align-items: center; justify-content: center; gap: 12px;
+width: 100%; max-width: 420px; padding: 18px 40px;
+background: #25D366; color: #fff;
+border-radius: 4px; text-decoration: none;
+font-family: ‘DM Sans’, sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 1px;
+transition: all .2s;
+}
+.btn-whatsapp:hover { opacity: .9; transform: translateY(-2px); }
+.contact-note { font-size: 13px; color: #9A8878; margin-top: 24px; font-style: italic; }
+.contact-info-strip {
+display: flex; justify-content: center; gap: 48px; flex-wrap: wrap;
+margin-top: 56px; padding-top: 40px; border-top: 1px solid #E8DCC8;
+}
+.contact-info-item { text-align: center; }
+.contact-info-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #D4891A; margin-bottom: 6px; }
+.contact-info-value { font-family: ‘Lora’, Georgia, serif; font-size: 17px; color: #1E0F08; }
+
+/* FOOTER */
+footer { background: #1E0F08; padding: 48px; }
+.footer-inner {
+max-width: 1200px; margin: 0 auto;
+display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px;
+border-top: 1px solid rgba(245,237,216,.08); padding-top: 32px;
+}
+.footer-logo { font-family: ‘Bebas Neue’, Impact, sans-serif; font-size: 24px; color: #D4891A; }
+.footer-links { display: flex; gap: 32px; }
+.footer-links a { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,237,216,.3); text-decoration: none; transition: color .2s; }
+.footer-links a:hover { color: #F5EDD8; }
+.footer-copy { font-size: 11px; color: rgba(245,237,216,.2); }
+
+/* REVEAL */
+[data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+[data-reveal].visible { opacity: 1; transform: none; }
+[data-reveal=“left”] { transform: translateX(-28px); }
+[data-reveal=“left”].visible { transform: none; }
+[data-reveal=“right”] { transform: translateX(28px); }
+[data-reveal=“right”].visible { transform: none; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 900px) {
+nav { padding: 0 20px; }
+.nav-links { display: none; }
+.section { padding: 64px 20px; }
+.about-grid { grid-template-columns: 1fr; gap: 40px; }
+.about-visual { aspect-ratio: 16/9; }
+.testimonials-grid { grid-template-columns: 1fr; }
+.hours-band { padding: 40px 20px; }
+.hours-inner { flex-direction: column; align-items: flex-start; }
+.proof-strip { gap: 36px; padding: 32px 20px; }
+footer { padding: 32px 20px; }
+.footer-inner { flex-direction: column; text-align: center; }
+.contact-info-strip { gap: 28px; }
+}
+</style>
+
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Le P'tit Boulogne</div>
+  <div class="nav-links">
+    <a href="#about">Notre histoire</a>
+    <a href="#menu">Menu</a>
+    <a href="#avis">Avis</a>
+    <a href="#contact" class="nav-cta">Réserver</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-stamp"><span>Bistrot & Brasserie · Boulogne-Billancourt · Depuis 2023</span></div>
+    <h1>Le <span>P'tit</span><br/>Boulogne</h1>
+    <p class="hero-tagline">Cuisine française · Produits frais · Ambiance bistrot</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary">📞 Réserver une table</a>
+      <a href="#menu" class="btn btn-ghost">Voir le menu</a>
+    </div>
+  </div>
+</section>
+
+<div class="proof-strip">
+  <div class="proof-item"><span class="proof-num">4.8</span><div class="proof-label">★ Note Google</div></div>
+  <div class="proof-item"><span class="proof-num">9/10</span><div class="proof-label">TheFork</div></div>
+  <div class="proof-item"><span class="proof-num">29€</span><div class="proof-label">Prix moyen</div></div>
+  <div class="proof-item"><span class="proof-num">100%</span><div class="proof-label">Fait maison</div></div>
+</div>
+
+<section class="section about-section" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-visual" data-reveal="left">
+        <div class="about-emoji">🍽️</div>
+        <div class="about-badge"><div class="about-badge-num">4.8</div><div class="about-badge-text">Google</div></div>
+        <div class="about-visual-footer"><p class="about-visual-caption">42 Boulevard Jean Jaurès,<br/>92100 Boulogne-Billancourt</p></div>
+      </div>
+      <div data-reveal="right">
+        <div class="eyebrow">Notre histoire</div>
+        <h2 class="section-title">Un bistrot<br/><em>qui vous ressemble</em></h2>
+        <p style="font-size:15px;line-height:1.8;color:#5c4535;margin-bottom:16px;">Bienvenue au P'tit Boulogne — votre bistrot de quartier où l'on mange bien, où l'ambiance est chaleureuse et où les produits sont toujours frais.</p>
+        <p style="font-size:15px;line-height:1.8;color:#5c4535;margin-bottom:16px;">Cuisine française traditionnelle, entrecôtes, poissons grillés, burgers maison... Tout est préparé avec soin pour une addition raisonnable.</p>
+        <div class="about-quote">
+          <blockquote>"Accueil chaleureux, ambiance bistrot sympathique, qualité très bonne des plats, produits frais, service attentif, addition raisonnable."</blockquote>
+          <cite>— Vincent I. · Avis TheFork ★★★★★</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section menu-section" id="menu">
+  <div class="section-inner">
+    <div data-reveal>
+      <div class="eyebrow" style="color:#D4891A;">Ce qu'on vous propose</div>
+      <h2 class="section-title" style="color:#F5EDD8;">Notre <em style="color:#D4891A;">Menu</em></h2>
+    </div>
+    <div class="menu-tabs" data-reveal>
+      <button class="tab active" onclick="switchMenu(0,this)">Entrées</button>
+      <button class="tab" onclick="switchMenu(1,this)">Plats</button>
+      <button class="tab" onclick="switchMenu(2,this)">Desserts</button>
+      <button class="tab" onclick="switchMenu(3,this)">Boissons</button>
+    </div>
+    <div class="menu-list" id="menuList"></div>
+  </div>
+</section>
+
+<section class="section testimonials-section" id="avis">
+  <div class="section-inner">
+    <div data-reveal>
+      <div class="eyebrow">Ce qu'ils en disent</div>
+      <h2 class="section-title">Avis de nos <em>clients</em></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card" data-reveal>
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Accueil chaleureux, ambiance bistrot sympathique, qualité très bonne des plats, produits frais et préparation, service attentif, addition raisonnable."</p>
+        <div class="testimonial-author">Vincent I. · TheFork</div>
+      </div>
+      <div class="testimonial-card" data-reveal style="transition-delay:.1s">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Tout est plaisir, l'accueil, l'ambiance, la cuisine. Une bonne adresse pour déjeuner rapidement dans une ambiance bistrot conviviale."</p>
+        <div class="testimonial-author">Isabelle S. · TheFork</div>
+      </div>
+      <div class="testimonial-card" data-reveal style="transition-delay:.2s">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"The best frites and beer with such lovely owners who are extremely friendly and welcoming. Highly recommended!"</p>
+        <div class="testimonial-author">Tom C. · Google Review</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hours-band" id="horaires">
+  <div class="hours-inner">
+    <div class="hours-title" data-reveal>Nos horaires</div>
+    <div class="hours-grid" data-reveal>
+      <div class="hours-item">
+        <div class="hours-day">Lun — Ven</div>
+        <div class="hours-time">11h30 → 15h30<br/>18h00 → 21h45</div>
+      </div>
+      <div class="hours-item">
+        <div class="hours-day">Samedi</div>
+        <div class="hours-time closed">Fermé</div>
+      </div>
+      <div class="hours-item">
+        <div class="hours-day">Dimanche</div>
+        <div class="hours-time closed">Fermé</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="section contact-section" id="contact">
+  <div class="section-inner">
+    <div class="contact-big" data-reveal>
+      <div class="eyebrow" style="justify-content:center;">Nous contacter</div>
+      <h2 class="section-title" style="color:#1E0F08;">Un coup <em>de fil</em><br/>suffit</h2>
+      <p>Appelez-nous directement ou envoyez un message WhatsApp — on vous répond rapidement.</p>
+      <div class="contact-buttons">
+        <a href="tel:+33951548407" class="btn-call">
+          <div><span class="btn-call-label">Réserver une table</span><span class="btn-call-num">09 51 54 84 07</span></div>
+        </a>
+        <a href="tel:+33951548407" class="btn-order">
+          <div><span class="btn-order-label">Commander par téléphone</span><span class="btn-order-num">09 51 54 84 07</span></div>
+        </a>
+        <a href="https://wa.me/33951548407?text=Bonjour%2C%20je%20voudrais%20r%C3%A9server%20une%20table%20au%20P%27tit%20Boulogne%20!" target="_blank" class="btn-whatsapp">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Réserver via WhatsApp
+        </a>
+      </div>
+      <p class="contact-note">Réponse rapide · Lundi au Vendredi, 11h30 – 21h45</p>
+      <div class="contact-info-strip">
+        <div class="contact-info-item"><div class="contact-info-label">Adresse</div><div class="contact-info-value">42 Bd Jean Jaurès, 92100</div></div>
+        <div class="contact-info-item"><div class="contact-info-label">Métro</div><div class="contact-info-value">Marcel Sembat — Ligne 9</div></div>
+        <div class="contact-info-item"><div class="contact-info-label">Téléphone</div><div class="contact-info-value">09 51 54 84 07</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Le P'tit Boulogne</div>
+    <div class="footer-links">
+      <a href="#menu">Menu</a>
+      <a href="#horaires">Horaires</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-copy">© 2025 Le P'tit Boulogne · 42 Bd Jean Jaurès, 92100 Boulogne-Billancourt</div>
+  </div>
+</footer>
+
+<script>
+const menus = [
+  [
+    {name:'Deufs durs', desc:'Mayonnaise maison', price:'4,5€'},
+    {name:'Burrata', desc:'Tomates cerises, roquette', price:'9€'},
+    {name:'Assiette de charcuterie', desc:'Sélection du moment', price:'9€'},
+    {name:'Entrée du jour', desc:'Voir l\'ardoise', price:'5€'},
+  ],
+  [
+    {name:'Entrecôte black angus 220g', desc:'Cuisson au choix, frites maison', price:'19,9€'},
+    {name:'Pavé de saumon grillé', desc:'Légumes de saison', price:'18€'},
+    {name:'Burger maison', desc:'Pain brioché, frites maison', price:'15€'},
+    {name:'Belle salade césar', desc:'Poulet grillé, parmesan, croûtons', price:'15€'},
+    {name:'Plat du jour', desc:'Voir l\'ardoise', price:'13,9€'},
+    {name:'Planche mixte', desc:'Charcuterie & fromages', price:'16€'},
+    {name:'Tapas mix "X2"', desc:'Sélection de tapas pour deux', price:'25€'},
+  ],
+  [
+    {name:'Tarte du jour', desc:'Selon arrivage', price:'4€'},
+    {name:'Moelleux chocolat', desc:'Cœur coulant', price:'5€'},
+    {name:'Tarte citron', desc:'Meringuée maison', price:'6€'},
+  ],
+  [
+    {name:'Café', desc:'Espresso', price:'2€'},
+    {name:'Coca', desc:'33cl', price:'3€'},
+    {name:'Bière 25cl', desc:'Pression', price:'4€'},
+  ],
+];
+let current = 0;
+function switchMenu(i, tab) {
+  current = i;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  renderMenu();
+}
+function renderMenu() {
+  document.getElementById('menuList').innerHTML = menus[current].map(item => `
+    <div class="menu-row">
+      <div><div class="menu-name">${item.name}</div><div class="menu-desc">${item.desc}</div></div>
+      <div class="menu-dots"></div>
+      <div class="menu-price">${item.price}</div>
+    </div>`).join('');
+}
+renderMenu();
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('[data-reveal]').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
