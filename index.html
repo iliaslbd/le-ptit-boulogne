@@ -7,465 +7,664 @@
 <title>Le P'tit Boulogne — Bistrot & Brasserie</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
+:root {
+  --cream:      #FAF5EE;
+  --cream-dark: #F2EAE0;
+  --terra:      #C4622D;
+  --terra-dark: #A84E22;
+  --terra-light:#F0E0D6;
+  --dark:       #1A1208;
+  --brown:      #3D2010;
+  --text:       #2C1A10;
+  --muted:      #8B7355;
+  --white:      #FFFFFF;
+  --shadow:     0 4px 24px rgba(44,26,16,.10);
+  --shadow-sm:  0 2px 12px rgba(44,26,16,.07);
+}
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { background: #1E0F08; color: #F5EDD8; font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; overflow-x: hidden; }
+body { background: var(--cream); color: var(--text); font-family: 'Inter', -apple-system, sans-serif; overflow-x: hidden; }
 
-/* NAV */
+/* ── NAV ── */
 nav {
 position: fixed; top: 0; left: 0; right: 0; z-index: 900;
 display: flex; justify-content: space-between; align-items: center;
-padding: 0 48px; height: 68px;
-background: rgba(30,15,8,.97);
-border-bottom: 1px solid rgba(212,137,26,.2);
+padding: 0 48px; height: 70px;
+background: rgba(250,245,238,.97);
+backdrop-filter: blur(10px);
+border-bottom: 1px solid rgba(196,98,45,.1);
 }
-.nav-logo { font-family: ‘Bebas Neue’, Impact, sans-serif; font-size: 22px; letter-spacing: 2px; color: #D4891A; }
-.nav-links { display: flex; gap: 40px; align-items: center; }
-.nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,237,216,.6); text-decoration: none; transition: color .2s; }
-.nav-links a:hover { color: #F5EDD8; }
-.nav-cta { padding: 10px 24px !important; border: 1px solid #D4891A !important; color: #D4891A !important; border-radius: 2px; }
-.nav-cta:hover { background: #D4891A !important; color: #1E0F08 !important; }
+.nav-logo { font-family: ‘Playfair Display’, serif; font-size: 22px; color: var(–terra); font-weight: 600; }
+.nav-links { display: flex; gap: 36px; align-items: center; }
+.nav-links a { font-size: 14px; color: var(–text); text-decoration: none; font-weight: 400; transition: color .2s; }
+.nav-links a:hover { color: var(–terra); }
+.nav-btn {
+display: flex; align-items: center; gap: 8px;
+padding: 11px 22px; background: var(–terra); color: #fff;
+border-radius: 50px; font-size: 14px; font-weight: 500;
+text-decoration: none; transition: background .2s;
+}
+.nav-btn:hover { background: var(–terra-dark); }
+.nav-btn svg { width: 16px; height: 16px; }
 
-/* HERO */
+/* ── HERO ── */
 .hero {
 height: 100vh; min-height: 640px;
-display: grid; place-items: center;
-background: #1E0F08;
-position: relative; overflow: hidden; padding-top: 68px;
+display: flex; flex-direction: column; align-items: center; justify-content: center;
+text-align: center; padding: 68px 24px 40px;
+position: relative; overflow: hidden;
+background: linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.55)),
+url(‘https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80’) center/cover no-repeat;
 }
-.hero-bg {
-position: absolute; inset: 0;
-background:
-radial-gradient(ellipse 80% 60% at 50% 30%, rgba(192,57,43,.25) 0%, transparent 65%),
-radial-gradient(ellipse 60% 80% at 80% 80%, rgba(212,137,26,.12) 0%, transparent 55%),
-repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(245,237,216,.015) 2px, rgba(245,237,216,.015) 4px);
-}
-.hero::after {
-content: ‘’; position: absolute; inset: 0; pointer-events: none;
-background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.65) 100%);
-}
-.hero-inner { position: relative; z-index: 2; text-align: center; padding: 0 24px; }
-.hero-stamp {
-display: inline-flex; align-items: center; gap: 12px; margin-bottom: 32px;
+.hero-eyebrow {
+font-size: 12px; letter-spacing: 4px; text-transform: uppercase;
+color: var(–terra-light); margin-bottom: 16px;
 opacity: 0; animation: fadeUp .7s ease .1s forwards;
 }
-.hero-stamp::before, .hero-stamp::after { content: ‘’; display: block; width: 40px; height: 1px; background: #D4891A; }
-.hero-stamp span { font-size: 10px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: #D4891A; }
 .hero h1 {
-font-family: ‘Bebas Neue’, Impact, ‘Arial Narrow’, sans-serif;
-font-size: clamp(72px, 14vw, 160px); line-height: .9;
-color: #F5EDD8 !important;
-opacity: 0; animation: fadeUp .8s ease .25s forwards;
+font-family: ‘Playfair Display’, serif;
+font-size: clamp(56px, 10vw, 110px); color: #fff; line-height: 1;
+font-weight: 700; margin-bottom: 8px;
+opacity: 0; animation: fadeUp .8s ease .2s forwards;
 }
-.hero h1 span { color: #C0392B !important; }
+.hero-city {
+font-size: 16px; color: rgba(255,255,255,.7); margin-bottom: 16px;
+opacity: 0; animation: fadeUp .8s ease .3s forwards;
+}
 .hero-tagline {
-font-family: ‘Lora’, Georgia, serif; font-style: italic;
-font-size: clamp(16px, 2.5vw, 22px); color: rgba(245,237,216,.6);
-margin-top: 20px; opacity: 0; animation: fadeUp .8s ease .4s forwards;
+font-family: ‘Playfair Display’, serif; font-style: italic;
+font-size: clamp(18px, 3vw, 26px); color: rgba(255,255,255,.9);
+margin-bottom: 8px;
+opacity: 0; animation: fadeUp .8s ease .35s forwards;
 }
-.hero-actions {
-display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
-margin-top: 44px; opacity: 0; animation: fadeUp .8s ease .55s forwards;
+.hero-sub {
+font-size: 15px; color: rgba(255,255,255,.65); margin-bottom: 40px;
+opacity: 0; animation: fadeUp .8s ease .45s forwards;
 }
-.btn {
-display: inline-flex; align-items: center; gap: 10px;
-padding: 15px 40px; border-radius: 2px;
-font-family: ‘DM Sans’, sans-serif; font-size: 12px; font-weight: 500;
-letter-spacing: 2.5px; text-transform: uppercase; text-decoration: none; cursor: pointer;
-transition: all .22s;
+.hero-btns {
+display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+opacity: 0; animation: fadeUp .8s ease .55s forwards;
 }
-.btn-primary { background: #C0392B; color: #fff; border: 2px solid #C0392B; }
-.btn-primary:hover { background: transparent; color: #C0392B; }
-.btn-ghost { background: transparent; color: #F5EDD8; border: 2px solid rgba(245,237,216,.35); }
-.btn-ghost:hover { border-color: #F5EDD8; }
-
-/* PROOF */
-.proof-strip {
-background: #1E0F08; padding: 36px 48px;
-display: flex; justify-content: center; gap: 72px; flex-wrap: wrap;
-border-top: 1px solid rgba(212,137,26,.15); border-bottom: 1px solid rgba(212,137,26,.15);
+.btn-solid {
+display: flex; align-items: center; gap: 8px;
+padding: 14px 28px; background: var(–terra); color: #fff;
+border-radius: 50px; font-size: 14px; font-weight: 500;
+text-decoration: none; transition: background .2s; border: 2px solid var(–terra);
 }
-.proof-item { text-align: center; }
-.proof-num { font-family: ‘Bebas Neue’, Impact, sans-serif; font-size: 52px; color: #D4891A; display: block; line-height: 1; }
-.proof-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(245,237,216,.4); margin-top: 6px; }
-
-/* SECTION */
-.section { padding: 96px 48px; }
-.section-inner { max-width: 1200px; margin: 0 auto; }
-.eyebrow {
-font-size: 10px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: #D4891A;
-display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
-}
-.eyebrow::after { content: ‘’; display: block; width: 32px; height: 1px; background: #D4891A; }
-.section-title { font-family: ‘Bebas Neue’, Impact, sans-serif; font-size: clamp(48px, 6vw, 80px); line-height: .95; color: #1E0F08; margin-bottom: 24px; }
-.section-title em { color: #C0392B; font-style: normal; }
-
-/* ABOUT */
-.about-section { background: #FBF7EF; }
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-.about-visual {
-position: relative; aspect-ratio: 4/5; border-radius: 2px; overflow: hidden;
-background: linear-gradient(135deg, #3A1F10, #1E0F08);
-display: flex; align-items: center; justify-content: center;
-}
-.about-emoji { font-size: 100px; }
-.about-badge {
-position: absolute; top: 24px; right: 24px; width: 80px; height: 80px; border-radius: 50%;
-background: #C0392B; display: flex; flex-direction: column; align-items: center; justify-content: center;
-}
-.about-badge-num { font-family: ‘Bebas Neue’, Impact, sans-serif; font-size: 26px; color: #fff; line-height: 1; }
-.about-badge-text { font-size: 8px; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.7); }
-.about-visual-footer {
-position: absolute; bottom: 0; left: 0; right: 0; padding: 32px;
-background: linear-gradient(to top, rgba(30,15,8,.9) 0%, transparent 100%);
-}
-.about-visual-caption { font-family: ‘Lora’, Georgia, serif; font-style: italic; font-size: 14px; color: rgba(245,237,216,.7); }
-.about-content p { font-size: 15px; line-height: 1.8; color: #5c4535; margin-bottom: 16px; }
-.about-quote { margin-top: 32px; padding: 24px; border-left: 3px solid #D4891A; background: #F5EDD8; }
-.about-quote blockquote { font-family: ‘Lora’, Georgia, serif; font-style: italic; font-size: 17px; color: #1E0F08; line-height: 1.6; }
-.about-quote cite { display: block; margin-top: 10px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #9A8878; font-style: normal; }
-
-/* MENU */
-.menu-section { background: #1E0F08; }
-.menu-section .section-title { color: #F5EDD8; }
-.menu-tabs { display: flex; gap: 4px; margin-bottom: 48px; border-bottom: 1px solid rgba(245,237,216,.1); flex-wrap: wrap; }
-.tab {
-padding: 12px 24px 14px; cursor: pointer;
-font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
-color: rgba(245,237,216,.4); background: transparent; border: none;
-border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all .2s;
-font-family: ‘DM Sans’, sans-serif;
-}
-.tab:hover { color: rgba(245,237,216,.8); }
-.tab.active { color: #D4891A; border-bottom-color: #D4891A; }
-.menu-list { display: flex; flex-direction: column; }
-.menu-row {
-display: flex; justify-content: space-between; align-items: baseline;
-padding: 20px 0; border-bottom: 1px solid rgba(245,237,216,.07);
-transition: padding .2s;
-}
-.menu-row:hover { padding-left: 12px; }
-.menu-row:last-child { border-bottom: none; }
-.menu-name { font-family: ‘Lora’, Georgia, serif; font-size: 19px; color: #F5EDD8; margin-bottom: 4px; }
-.menu-desc { font-size: 13px; color: rgba(245,237,216,.4); }
-.menu-dots {
-flex: 1; margin: 0 16px; height: 1px; align-self: flex-end; margin-bottom: 6px;
-background: repeating-linear-gradient(to right, rgba(245,237,216,.15) 0, rgba(245,237,216,.15) 4px, transparent 4px, transparent 8px);
-}
-.menu-price { font-family: ‘Bebas Neue’, Impact, sans-serif; font-size: 22px; color: #D4891A; white-space: nowrap; }
-
-/* TESTIMONIALS */
-.testimonials-section { background: #FBF7EF; }
-.testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
-.testimonial-card {
-background: #fff; padding: 28px; border-radius: 2px;
-box-shadow: 0 2px 12px rgba(30,15,8,.08);
-position: relative; transition: transform .2s;
-}
-.testimonial-card:hover { transform: translateY(-4px); }
-.testimonial-stars { color: #D4891A; font-size: 13px; letter-spacing: 2px; margin-bottom: 16px; }
-.testimonial-text { font-family: ‘Lora’, Georgia, serif; font-style: italic; font-size: 15px; line-height: 1.7; color: #2C1810; margin-bottom: 20px; }
-.testimonial-author { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #9A8878; }
-.testimonial-card::before { content: ‘\201C’; position: absolute; top: 16px; right: 24px; font-family: ‘Lora’, Georgia, serif; font-size: 80px; color: #E8DCC8; line-height: 1; }
-
-/* HOURS */
-.hours-band { background: #C0392B; padding: 60px 48px; }
-.hours-inner { display: flex; align-items: center; justify-content: space-between; gap: 48px; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; }
-.hours-title { font-family: ‘Bebas Neue’, Impact, sans-serif; font-size: 48px; color: #fff; }
-.hours-grid { display: flex; gap: 40px; flex-wrap: wrap; }
-.hours-item { text-align: center; }
-.hours-day { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 6px; }
-.hours-time { font-family: ‘Bebas Neue’, Impact, sans-serif; font-size: 20px; color: #fff; line-height: 1.4; }
-.hours-time.closed { color: rgba(255,255,255,.35); font-size: 18px; }
-
-/* CONTACT */
-.contact-section { background: #F5EDD8; }
-.contact-big { text-align: center; max-width: 700px; margin: 0 auto; }
-.contact-big p { font-size: 16px; line-height: 1.7; color: #9A8878; margin-bottom: 48px; }
-.contact-buttons { display: flex; flex-direction: column; align-items: center; gap: 16px; }
-.btn-call {
-display: flex; align-items: center; justify-content: center;
-width: 100%; max-width: 420px; padding: 22px 40px;
-background: #1E0F08; color: #F5EDD8;
-border-radius: 4px; text-decoration: none;
-transition: all .2s; box-shadow: 0 8px 40px rgba(30,15,8,.18);
-}
-.btn-call:hover { background: #C0392B; transform: translateY(-2px); }
-.btn-call-label { font-family: ‘DM Sans’, sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #D4891A; display: block; margin-bottom: 6px; }
-.btn-call-num { font-family: ‘Bebas Neue’, Impact, sans-serif; font-size: 32px; letter-spacing: 2px; }
-.btn-order {
-display: flex; align-items: center; justify-content: center;
-width: 100%; max-width: 420px; padding: 22px 40px;
-background: #D4891A; color: #1E0F08;
-border-radius: 4px; text-decoration: none;
-transition: all .2s; box-shadow: 0 8px 40px rgba(30,15,8,.18);
-}
-.btn-order:hover { background: #b8730f; transform: translateY(-2px); }
-.btn-order-label { font-family: ‘DM Sans’, sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(30,15,8,.6); display: block; margin-bottom: 6px; }
-.btn-order-num { font-family: ‘Bebas Neue’, Impact, sans-serif; font-size: 32px; letter-spacing: 2px; }
-.btn-whatsapp {
-display: flex; align-items: center; justify-content: center; gap: 12px;
-width: 100%; max-width: 420px; padding: 18px 40px;
-background: #25D366; color: #fff;
-border-radius: 4px; text-decoration: none;
-font-family: ‘DM Sans’, sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 1px;
+.btn-solid:hover { background: var(–terra-dark); border-color: var(–terra-dark); }
+.btn-outline-white {
+display: flex; align-items: center; gap: 8px;
+padding: 14px 28px; background: transparent; color: #fff;
+border-radius: 50px; font-size: 14px; font-weight: 500;
+text-decoration: none; border: 2px solid rgba(255,255,255,.6);
 transition: all .2s;
 }
-.btn-whatsapp:hover { opacity: .9; transform: translateY(-2px); }
-.contact-note { font-size: 13px; color: #9A8878; margin-top: 24px; font-style: italic; }
-.contact-info-strip {
-display: flex; justify-content: center; gap: 48px; flex-wrap: wrap;
-margin-top: 56px; padding-top: 40px; border-top: 1px solid #E8DCC8;
+.btn-outline-white:hover { background: rgba(255,255,255,.1); border-color: #fff; }
+.btn-outline-terra-w {
+display: flex; align-items: center; gap: 8px;
+padding: 14px 28px; background: transparent; color: var(–terra-light);
+border-radius: 50px; font-size: 14px; font-weight: 500;
+text-decoration: none; border: 2px solid rgba(240,224,214,.5);
+transition: all .2s;
 }
-.contact-info-item { text-align: center; }
-.contact-info-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #D4891A; margin-bottom: 6px; }
-.contact-info-value { font-family: ‘Lora’, Georgia, serif; font-size: 17px; color: #1E0F08; }
+.btn-outline-terra-w:hover { border-color: var(–terra-light); }
 
-/* FOOTER */
-footer { background: #1E0F08; padding: 48px; }
-.footer-inner {
-max-width: 1200px; margin: 0 auto;
-display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px;
-border-top: 1px solid rgba(245,237,216,.08); padding-top: 32px;
+/* ── SECTION BASE ── */
+.section { padding: 88px 48px; }
+.section-inner { max-width: 1100px; margin: 0 auto; }
+.section-center { text-align: center; }
+.eyebrow {
+font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+color: var(–terra); margin-bottom: 12px; display: block;
 }
-.footer-logo { font-family: ‘Bebas Neue’, Impact, sans-serif; font-size: 24px; color: #D4891A; }
-.footer-links { display: flex; gap: 32px; }
-.footer-links a { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,237,216,.3); text-decoration: none; transition: color .2s; }
-.footer-links a:hover { color: #F5EDD8; }
-.footer-copy { font-size: 11px; color: rgba(245,237,216,.2); }
+.section-title {
+font-family: ‘Playfair Display’, serif;
+font-size: clamp(36px, 5vw, 58px); color: var(–text);
+font-weight: 700; line-height: 1.1; margin-bottom: 16px;
+}
+.section-divider {
+width: 48px; height: 3px; background: var(–terra);
+margin: 0 auto 28px; border-radius: 2px;
+}
+.section-sub { font-size: 16px; color: var(–muted); line-height: 1.7; max-width: 640px; margin: 0 auto; }
 
-/* REVEAL */
-[data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+/* ── WELCOME ── */
+.welcome { background: var(–cream); }
+.welcome-features { display: flex; gap: 48px; justify-content: center; flex-wrap: wrap; margin-top: 56px; }
+.feature { text-align: center; }
+.feature-icon {
+width: 72px; height: 72px; border-radius: 50%;
+background: var(–terra-light); display: flex; align-items: center; justify-content: center;
+font-size: 30px; margin: 0 auto 16px;
+}
+.feature-title { font-family: ‘Playfair Display’, serif; font-size: 20px; color: var(–text); margin-bottom: 6px; }
+.feature-sub { font-size: 14px; color: var(–muted); }
+
+/* ── SPECIALITES ── */
+.specialites { background: var(–white); }
+.spec-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 56px; }
+.spec-card {
+border-radius: 20px; overflow: hidden; position: relative;
+background: var(–cream-dark);
+box-shadow: var(–shadow-sm); transition: transform .2s, box-shadow .2s;
+cursor: default;
+}
+.spec-card:hover { transform: translateY(-4px); box-shadow: var(–shadow); }
+.spec-img {
+width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block;
+background: linear-gradient(135deg, #C4622D22, #3D201044);
+display: flex; align-items: center; justify-content: center;
+font-size: 64px;
+}
+.spec-badge {
+position: absolute; top: 14px; left: 14px;
+background: var(–terra); color: #fff;
+font-size: 11px; font-weight: 500; padding: 5px 12px; border-radius: 50px;
+}
+.spec-name {
+position: absolute; bottom: 0; left: 0; right: 0;
+padding: 40px 18px 18px;
+background: linear-gradient(to top, rgba(0,0,0,.75), transparent);
+color: #fff; font-family: ‘Playfair Display’, serif;
+font-size: 20px; font-weight: 600;
+}
+
+/* ── MENU ── */
+.menu-section { background: var(–cream); }
+.menu-featured {
+background: var(–terra); border-radius: 20px; padding: 32px;
+display: flex; align-items: center; gap: 24px;
+margin-bottom: 24px; max-width: 640px; margin: 0 auto 24px;
+}
+.menu-featured-icon {
+width: 60px; height: 60px; border-radius: 50%;
+background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center;
+font-size: 28px; flex-shrink: 0;
+}
+.menu-featured-title { font-family: ‘Playfair Display’, serif; font-size: 22px; color: #fff; margin-bottom: 6px; }
+.menu-featured-sub { font-size: 14px; color: rgba(255,255,255,.75); margin-bottom: 12px; line-height: 1.5; }
+.menu-featured-link { font-size: 14px; color: rgba(255,255,255,.9); text-decoration: none; display: flex; align-items: center; gap: 6px; }
+.menu-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 840px; margin: 0 auto; }
+.menu-card {
+background: var(–white); border-radius: 20px; padding: 32px;
+box-shadow: var(–shadow-sm); text-align: center;
+transition: transform .2s, box-shadow .2s;
+}
+.menu-card:hover { transform: translateY(-4px); box-shadow: var(–shadow); }
+.menu-card-icon {
+width: 60px; height: 60px; border-radius: 50%;
+background: var(–terra-light); display: flex; align-items: center; justify-content: center;
+font-size: 26px; margin: 0 auto 16px;
+}
+.menu-card-title { font-family: ‘Playfair Display’, serif; font-size: 22px; color: var(–text); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.menu-card-sub { font-family: ‘Playfair Display’, serif; font-style: italic; font-size: 15px; color: var(–terra); margin-bottom: 8px; }
+.menu-card-desc { font-size: 14px; color: var(–muted); line-height: 1.5; margin-bottom: 20px; }
+.menu-card-link {
+font-size: 14px; color: var(–terra); text-decoration: none;
+display: inline-flex; align-items: center; gap: 6px;
+border-bottom: 1px solid var(–terra); padding-bottom: 2px;
+font-weight: 500; transition: gap .2s;
+}
+.menu-card-link:hover { gap: 10px; }
+
+/* ── CARTE COMPLÈTE ── */
+.carte-section { background: var(–white); }
+.carte-tabs { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px; }
+.ctab {
+padding: 10px 24px; border-radius: 50px; cursor: pointer; border: none;
+font-size: 14px; font-weight: 500; transition: all .2s; font-family: ‘Inter’, sans-serif;
+background: var(–cream-dark); color: var(–muted);
+}
+.ctab.active { background: var(–terra); color: #fff; }
+.ctab:hover:not(.active) { background: var(–terra-light); color: var(–terra); }
+.carte-list { max-width: 680px; margin: 0 auto; }
+.carte-row {
+display: flex; justify-content: space-between; align-items: flex-start;
+padding: 20px 0; border-bottom: 1px solid rgba(44,26,16,.07);
+transition: padding .2s;
+}
+.carte-row:hover { padding-left: 8px; }
+.carte-row:last-child { border-bottom: none; }
+.carte-name { font-family: ‘Playfair Display’, serif; font-size: 18px; color: var(–text); margin-bottom: 3px; }
+.carte-desc { font-size: 13px; color: var(–muted); }
+.carte-price {
+font-family: ‘Playfair Display’, serif; font-size: 18px;
+color: var(–terra); white-space: nowrap; margin-left: 16px; font-weight: 600;
+}
+
+/* ── AVIS ── */
+.avis-section { background: var(–cream); }
+.google-badge {
+display: inline-flex; align-items: center; gap: 12px;
+background: var(–white); border-radius: 50px; padding: 12px 24px;
+box-shadow: var(–shadow-sm); margin-bottom: 48px;
+}
+.google-badge img { width: 22px; height: 22px; }
+.google-badge-score { font-size: 18px; font-weight: 600; color: var(–text); }
+.google-badge-stars { color: #F59E0B; font-size: 16px; }
+.google-badge-count { font-size: 14px; color: var(–muted); }
+.avis-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.avis-card {
+background: var(–white); border-radius: 20px; padding: 28px;
+box-shadow: var(–shadow-sm); position: relative;
+transition: transform .2s, box-shadow .2s;
+}
+.avis-card:hover { transform: translateY(-4px); box-shadow: var(–shadow); }
+.avis-stars { color: #F59E0B; font-size: 14px; letter-spacing: 2px; margin-bottom: 14px; }
+.avis-quote { font-size: 48px; color: var(–terra-light); position: absolute; top: 20px; right: 24px; font-family: serif; line-height: 1; }
+.avis-text { font-size: 15px; color: var(–text); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+.avis-author { display: flex; align-items: center; gap: 12px; }
+.avis-avatar {
+width: 40px; height: 40px; border-radius: 50%;
+background: var(–terra-light); display: flex; align-items: center; justify-content: center;
+font-size: 15px; font-weight: 600; color: var(–terra); flex-shrink: 0;
+}
+.avis-name { font-size: 14px; font-weight: 600; color: var(–text); }
+.avis-date { font-size: 12px; color: var(–muted); }
+
+/* ── CONTACT ── */
+.contact-section { background: var(–dark); padding: 80px 48px; }
+.contact-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.contact-left h2 { font-family: ‘Playfair Display’, serif; font-size: 42px; color: #fff; margin-bottom: 8px; }
+.contact-left .contact-sub { font-family: ‘Playfair Display’, serif; font-style: italic; font-size: 18px; color: rgba(255,255,255,.5); margin-bottom: 36px; }
+.contact-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+.contact-item-icon {
+width: 44px; height: 44px; border-radius: 50%;
+background: rgba(196,98,45,.3); display: flex; align-items: center; justify-content: center;
+font-size: 18px; flex-shrink: 0;
+}
+.contact-item-label { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 4px; }
+.contact-item-value { font-size: 16px; color: #fff; line-height: 1.5; }
+.contact-services { display: flex; gap: 10px; flex-wrap: wrap; margin: 28px 0; }
+.contact-service-tag {
+display: flex; align-items: center; gap: 6px;
+padding: 8px 16px; border-radius: 50px;
+border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.7);
+font-size: 13px;
+}
+.contact-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+.btn-call-dark {
+display: flex; align-items: center; gap: 8px;
+padding: 14px 28px; background: var(–terra); color: #fff;
+border-radius: 50px; font-size: 14px; font-weight: 500;
+text-decoration: none; transition: background .2s;
+}
+.btn-call-dark:hover { background: var(–terra-dark); }
+.btn-itineraire {
+display: flex; align-items: center; gap: 8px;
+padding: 14px 28px; background: transparent; color: #fff;
+border-radius: 50px; font-size: 14px; font-weight: 500;
+text-decoration: none; border: 1px solid rgba(255,255,255,.2);
+transition: all .2s;
+}
+.btn-itineraire:hover { border-color: rgba(255,255,255,.5); }
+.contact-map {
+border-radius: 20px; overflow: hidden; height: 380px;
+box-shadow: 0 8px 40px rgba(0,0,0,.3);
+}
+.contact-map iframe { width: 100%; height: 100%; border: none; }
+
+/* ── FOOTER ── */
+footer {
+background: #0D0905; padding: 32px 48px;
+display: flex; justify-content: space-between; align-items: center;
+flex-wrap: wrap; gap: 16px;
+}
+.footer-logo { font-family: ‘Playfair Display’, serif; font-size: 20px; color: var(–terra); }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,.25); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 12px; color: rgba(255,255,255,.35); text-decoration: none; transition: color .2s; }
+.footer-links a:hover { color: rgba(255,255,255,.7); }
+
+/* ── REVEAL ── */
+[data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
 [data-reveal].visible { opacity: 1; transform: none; }
-[data-reveal=“left”] { transform: translateX(-28px); }
+[data-reveal=“left”] { transform: translateX(-24px); }
 [data-reveal=“left”].visible { transform: none; }
-[data-reveal=“right”] { transform: translateX(28px); }
+[data-reveal=“right”] { transform: translateX(24px); }
 [data-reveal=“right”].visible { transform: none; }
 
-@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 
+/* ── RESPONSIVE ── */
 @media (max-width: 900px) {
 nav { padding: 0 20px; }
 .nav-links { display: none; }
-.section { padding: 64px 20px; }
-.about-grid { grid-template-columns: 1fr; gap: 40px; }
-.about-visual { aspect-ratio: 16/9; }
-.testimonials-grid { grid-template-columns: 1fr; }
-.hours-band { padding: 40px 20px; }
-.hours-inner { flex-direction: column; align-items: flex-start; }
-.proof-strip { gap: 36px; padding: 32px 20px; }
-footer { padding: 32px 20px; }
-.footer-inner { flex-direction: column; text-align: center; }
-.contact-info-strip { gap: 28px; }
+.section { padding: 60px 20px; }
+.spec-grid { grid-template-columns: repeat(2, 1fr); }
+.menu-cards { grid-template-columns: 1fr; }
+.avis-grid { grid-template-columns: 1fr; }
+.contact-section { padding: 60px 20px; }
+.contact-inner { grid-template-columns: 1fr; gap: 40px; }
+.contact-map { height: 280px; }
+footer { padding: 24px 20px; flex-direction: column; text-align: center; }
+.welcome-features { gap: 32px; }
+}
+@media (max-width: 600px) {
+.spec-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+.hero-btns { flex-direction: column; align-items: center; }
 }
 </style>
 
 </head>
 <body>
 
+<!-- NAV -->
+
 <nav>
   <div class="nav-logo">Le P'tit Boulogne</div>
   <div class="nav-links">
-    <a href="#about">Notre histoire</a>
-    <a href="#menu">Menu</a>
+    <a href="#welcome">Notre Histoire</a>
+    <a href="#menu">Menus</a>
     <a href="#avis">Avis</a>
-    <a href="#contact" class="nav-cta">Réserver</a>
+    <a href="#contact">Contact</a>
   </div>
+  <a href="tel:+33951548407" class="nav-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.82a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.91a16 16 0 006.13 6.13l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+    Réserver
+  </a>
 </nav>
 
+<!-- HERO -->
+
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-inner">
-    <div class="hero-stamp"><span>Bistrot & Brasserie · Boulogne-Billancourt · Depuis 2023</span></div>
-    <h1>Le <span>P'tit</span><br/>Boulogne</h1>
-    <p class="hero-tagline">Cuisine française · Produits frais · Ambiance bistrot</p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn btn-primary">📞 Réserver une table</a>
-      <a href="#menu" class="btn btn-ghost">Voir le menu</a>
+  <div class="hero-eyebrow">Bistrot & Brasserie Française</div>
+  <h1>Le P'tit Boulogne</h1>
+  <div class="hero-city">Boulogne-Billancourt</div>
+  <p class="hero-tagline">Le bistrot du quartier qui vous ressemble</p>
+  <p class="hero-sub">Cuisine française · Produits frais · Ambiance chaleureuse</p>
+  <div class="hero-btns">
+    <a href="tel:+33951548407" class="btn-solid">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.82a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.91a16 16 0 006.13 6.13l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+      Réserver une table
+    </a>
+    <a href="#menu" class="btn-outline-white">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+      Voir les Menus
+    </a>
+    <a href="#contact" class="btn-outline-terra-w">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Nous trouver
+    </a>
+  </div>
+</section>
+
+<!-- WELCOME -->
+
+<section class="section welcome" id="welcome">
+  <div class="section-inner section-center" data-reveal>
+    <span class="eyebrow">Bienvenue chez nous</span>
+    <h2 class="section-title">Le Bistrot du Quartier</h2>
+    <div class="section-divider"></div>
+    <p class="section-sub">Depuis 2023, Le P'tit Boulogne vous accueille comme à la maison. Une cuisine française authentique, conviviale et accessible (prix moyen 29€), née de la passion des bons produits et du partage. Vous êtes ici chez vous.</p>
+    <div class="welcome-features">
+      <div class="feature">
+        <div class="feature-icon">👨‍🍳</div>
+        <div class="feature-title">Fait Maison</div>
+        <div class="feature-sub">Recettes traditionnelles</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🌿</div>
+        <div class="feature-title">Produits Frais</div>
+        <div class="feature-sub">Sélectionnés avec soin</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">❤️</div>
+        <div class="feature-title">Avec Amour</div>
+        <div class="feature-sub">Comme à la maison</div>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="proof-strip">
-  <div class="proof-item"><span class="proof-num">4.8</span><div class="proof-label">★ Note Google</div></div>
-  <div class="proof-item"><span class="proof-num">9/10</span><div class="proof-label">TheFork</div></div>
-  <div class="proof-item"><span class="proof-num">29€</span><div class="proof-label">Prix moyen</div></div>
-  <div class="proof-item"><span class="proof-num">100%</span><div class="proof-label">Fait maison</div></div>
-</div>
+<!-- SPECIALITÉS -->
 
-<section class="section about-section" id="about">
-  <div class="section-inner">
-    <div class="about-grid">
-      <div class="about-visual" data-reveal="left">
-        <div class="about-emoji">🍽️</div>
-        <div class="about-badge"><div class="about-badge-num">4.8</div><div class="about-badge-text">Google</div></div>
-        <div class="about-visual-footer"><p class="about-visual-caption">42 Boulevard Jean Jaurès,<br/>92100 Boulogne-Billancourt</p></div>
+<section class="section specialites" id="specialites">
+  <div class="section-inner section-center" data-reveal>
+    <span class="eyebrow">Découvrez</span>
+    <h2 class="section-title">Nos Spécialités</h2>
+    <div class="section-divider"></div>
+    <p class="section-sub">Des plats préparés avec passion, des ingrédients frais sélectionnés avec soin</p>
+  </div>
+  <div class="section-inner" style="margin-top:48px;">
+    <div class="spec-grid" data-reveal>
+      <div class="spec-card">
+        <div class="spec-img">🥩</div>
+        <div class="spec-badge">Nos viandes</div>
+        <div class="spec-name">Entrecôte Black Angus</div>
       </div>
-      <div data-reveal="right">
-        <div class="eyebrow">Notre histoire</div>
-        <h2 class="section-title">Un bistrot<br/><em>qui vous ressemble</em></h2>
-        <p style="font-size:15px;line-height:1.8;color:#5c4535;margin-bottom:16px;">Bienvenue au P'tit Boulogne — votre bistrot de quartier où l'on mange bien, où l'ambiance est chaleureuse et où les produits sont toujours frais.</p>
-        <p style="font-size:15px;line-height:1.8;color:#5c4535;margin-bottom:16px;">Cuisine française traditionnelle, entrecôtes, poissons grillés, burgers maison... Tout est préparé avec soin pour une addition raisonnable.</p>
-        <div class="about-quote">
-          <blockquote>"Accueil chaleureux, ambiance bistrot sympathique, qualité très bonne des plats, produits frais, service attentif, addition raisonnable."</blockquote>
-          <cite>— Vincent I. · Avis TheFork ★★★★★</cite>
+      <div class="spec-card">
+        <div class="spec-img">🐟</div>
+        <div class="spec-badge">Nos poissons</div>
+        <div class="spec-name">Pavé de Saumon Grillé</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-img">🍔</div>
+        <div class="spec-badge">Nos burgers</div>
+        <div class="spec-name">Burger Maison & Frites</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-img">🍫</div>
+        <div class="spec-badge">Nos desserts</div>
+        <div class="spec-name">Moelleux Chocolat</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+
+<section class="section menu-section" id="menu">
+  <div class="section-inner section-center" data-reveal>
+    <span class="eyebrow">Nos Cartes</span>
+    <h2 class="section-title">Choisissez votre moment</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="section-inner" style="margin-top:48px;">
+    <div class="menu-featured" data-reveal>
+      <div class="menu-featured-icon">👨‍🍳</div>
+      <div>
+        <div class="menu-featured-title">Le Plat du Jour</div>
+        <div class="menu-featured-sub">Consultez nos suggestions quotidiennes et l'ardoise du chef. Chaque jour, une nouvelle création à partir de 13,90€.</div>
+        <a href="#carte" class="menu-featured-link">Voir la carte complète →</a>
+      </div>
+    </div>
+    <div class="menu-cards" data-reveal>
+      <div class="menu-card">
+        <div class="menu-card-icon">🍽️</div>
+        <div class="menu-card-title">Déjeuner</div>
+        <div class="menu-card-sub">La Brasserie</div>
+        <div class="menu-card-desc">Service du midi de 11h30 à 15h30. Entrées, plats, desserts et formules à prix accessibles.</div>
+        <a href="#carte" class="menu-card-link">Découvrir la carte →</a>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-icon">🌙</div>
+        <div class="menu-card-title">Dîner</div>
+        <div class="menu-card-sub">Le Bistrot</div>
+        <div class="menu-card-desc">Service du soir de 18h00 à 21h45. Une ambiance chaleureuse pour prendre le temps.</div>
+        <a href="#carte" class="menu-card-link">Découvrir la carte →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CARTE COMPLÈTE -->
+
+<section class="section carte-section" id="carte">
+  <div class="section-inner section-center" data-reveal>
+    <span class="eyebrow">Notre Carte</span>
+    <h2 class="section-title">La Carte Complète</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="section-inner" style="margin-top:40px;" data-reveal>
+    <div class="carte-tabs">
+      <button class="ctab active" onclick="switchCarte(0,this)">Entrées</button>
+      <button class="ctab" onclick="switchCarte(1,this)">Plats</button>
+      <button class="ctab" onclick="switchCarte(2,this)">Desserts</button>
+      <button class="ctab" onclick="switchCarte(3,this)">Boissons</button>
+    </div>
+    <div class="carte-list" id="carteList"></div>
+  </div>
+</section>
+
+<!-- AVIS -->
+
+<section class="section avis-section" id="avis">
+  <div class="section-inner section-center" data-reveal>
+    <span class="eyebrow">Témoignages</span>
+    <h2 class="section-title">Ils aiment Le P'tit Boulogne</h2>
+    <div class="section-divider"></div>
+    <div class="google-badge">
+      <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      <span class="google-badge-score">4.8</span>
+      <span class="google-badge-stars">★★★★★</span>
+      <span class="google-badge-count">(16 avis)</span>
+    </div>
+    <div class="avis-grid" data-reveal>
+      <div class="avis-card">
+        <div class="avis-stars">★★★★★</div>
+        <div class="avis-quote">"</div>
+        <p class="avis-text">Accueil chaleureux, ambiance bistrot sympathique, qualité très bonne des plats, produits frais et préparation, service attentif, addition raisonnable.</p>
+        <div class="avis-author">
+          <div class="avis-avatar">V</div>
+          <div><div class="avis-name">Vincent I.</div><div class="avis-date">Il y a 2 mois · TheFork</div></div>
+        </div>
+      </div>
+      <div class="avis-card">
+        <div class="avis-stars">★★★★★</div>
+        <div class="avis-quote">"</div>
+        <p class="avis-text">Tout est plaisir, l'accueil, l'ambiance, la cuisine. Une vraie adresse de quartier comme on les aime. On y revient avec plaisir.</p>
+        <div class="avis-author">
+          <div class="avis-avatar">I</div>
+          <div><div class="avis-name">Isabelle S.</div><div class="avis-date">Il y a 2 mois · TheFork</div></div>
+        </div>
+      </div>
+      <div class="avis-card">
+        <div class="avis-stars">★★★★★</div>
+        <div class="avis-quote">"</div>
+        <p class="avis-text">The best frites and beer with such lovely owners who are extremely friendly and welcoming. Highly recommended!</p>
+        <div class="avis-author">
+          <div class="avis-avatar">T</div>
+          <div><div class="avis-name">Tom C.</div><div class="avis-date">Google Review</div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section menu-section" id="menu">
-  <div class="section-inner">
-    <div data-reveal>
-      <div class="eyebrow" style="color:#D4891A;">Ce qu'on vous propose</div>
-      <h2 class="section-title" style="color:#F5EDD8;">Notre <em style="color:#D4891A;">Menu</em></h2>
+<!-- CONTACT -->
+
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="contact-left" data-reveal="left">
+      <h2>Le P'tit Boulogne</h2>
+      <div class="contact-sub">Bistrot & Brasserie Française</div>
+      <div class="contact-item">
+        <div class="contact-item-icon">📍</div>
+        <div>
+          <div class="contact-item-label">Adresse</div>
+          <div class="contact-item-value">42 Boulevard Jean Jaurès<br/>92100 Boulogne-Billancourt</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">🕐</div>
+        <div>
+          <div class="contact-item-label">Horaires</div>
+          <div class="contact-item-value">Lundi au Vendredi<br/>11h30 – 15h30 · 18h00 – 21h45<br/><span style="color:rgba(255,255,255,.4);font-size:14px;">Fermé le samedi et dimanche</span></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">🚇</div>
+        <div>
+          <div class="contact-item-label">Accès</div>
+          <div class="contact-item-value">Marcel Sembat — Ligne 9</div>
+        </div>
+      </div>
+      <div class="contact-services">
+        <div class="contact-service-tag">🍽️ Sur place</div>
+        <div class="contact-service-tag">📞 Réservation</div>
+        <div class="contact-service-tag">💳 CB acceptée</div>
+      </div>
+      <div class="contact-btns">
+        <a href="tel:+33951548407" class="btn-call-dark">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.82a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.91a16 16 0 006.13 6.13l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          Appeler le 09 51 54 84 07
+        </a>
+        <a href="https://maps.google.com/?q=42+Boulevard+Jean+Jaurès+92100+Boulogne-Billancourt" target="_blank" class="btn-itineraire">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Itinéraire
+        </a>
+      </div>
     </div>
-    <div class="menu-tabs" data-reveal>
-      <button class="tab active" onclick="switchMenu(0,this)">Entrées</button>
-      <button class="tab" onclick="switchMenu(1,this)">Plats</button>
-      <button class="tab" onclick="switchMenu(2,this)">Desserts</button>
-      <button class="tab" onclick="switchMenu(3,this)">Boissons</button>
+    <div class="contact-map" data-reveal="right">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2626.0!2d2.2378991!3d48.832349!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6707fd5491281%3A0x8f5147b82674497e!2s42%20Bd%20Jean%20Jaur%C3%A8s%2C%2092100%20Boulogne-Billancourt!5e0!3m2!1sfr!2sfr!4v1700000000000"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
     </div>
-    <div class="menu-list" id="menuList"></div>
   </div>
 </section>
 
-<section class="section testimonials-section" id="avis">
-  <div class="section-inner">
-    <div data-reveal>
-      <div class="eyebrow">Ce qu'ils en disent</div>
-      <h2 class="section-title">Avis de nos <em>clients</em></h2>
-    </div>
-    <div class="testimonials-grid">
-      <div class="testimonial-card" data-reveal>
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"Accueil chaleureux, ambiance bistrot sympathique, qualité très bonne des plats, produits frais et préparation, service attentif, addition raisonnable."</p>
-        <div class="testimonial-author">Vincent I. · TheFork</div>
-      </div>
-      <div class="testimonial-card" data-reveal style="transition-delay:.1s">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"Tout est plaisir, l'accueil, l'ambiance, la cuisine. Une bonne adresse pour déjeuner rapidement dans une ambiance bistrot conviviale."</p>
-        <div class="testimonial-author">Isabelle S. · TheFork</div>
-      </div>
-      <div class="testimonial-card" data-reveal style="transition-delay:.2s">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"The best frites and beer with such lovely owners who are extremely friendly and welcoming. Highly recommended!"</p>
-        <div class="testimonial-author">Tom C. · Google Review</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="hours-band" id="horaires">
-  <div class="hours-inner">
-    <div class="hours-title" data-reveal>Nos horaires</div>
-    <div class="hours-grid" data-reveal>
-      <div class="hours-item">
-        <div class="hours-day">Lun — Ven</div>
-        <div class="hours-time">11h30 → 15h30<br/>18h00 → 21h45</div>
-      </div>
-      <div class="hours-item">
-        <div class="hours-day">Samedi</div>
-        <div class="hours-time closed">Fermé</div>
-      </div>
-      <div class="hours-item">
-        <div class="hours-day">Dimanche</div>
-        <div class="hours-time closed">Fermé</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<section class="section contact-section" id="contact">
-  <div class="section-inner">
-    <div class="contact-big" data-reveal>
-      <div class="eyebrow" style="justify-content:center;">Nous contacter</div>
-      <h2 class="section-title" style="color:#1E0F08;">Un coup <em>de fil</em><br/>suffit</h2>
-      <p>Appelez-nous directement ou envoyez un message WhatsApp — on vous répond rapidement.</p>
-      <div class="contact-buttons">
-        <a href="tel:+33951548407" class="btn-call">
-          <div><span class="btn-call-label">Réserver une table</span><span class="btn-call-num">09 51 54 84 07</span></div>
-        </a>
-        <a href="tel:+33951548407" class="btn-order">
-          <div><span class="btn-order-label">Commander par téléphone</span><span class="btn-order-num">09 51 54 84 07</span></div>
-        </a>
-        <a href="https://wa.me/33951548407?text=Bonjour%2C%20je%20voudrais%20r%C3%A9server%20une%20table%20au%20P%27tit%20Boulogne%20!" target="_blank" class="btn-whatsapp">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Réserver via WhatsApp
-        </a>
-      </div>
-      <p class="contact-note">Réponse rapide · Lundi au Vendredi, 11h30 – 21h45</p>
-      <div class="contact-info-strip">
-        <div class="contact-info-item"><div class="contact-info-label">Adresse</div><div class="contact-info-value">42 Bd Jean Jaurès, 92100</div></div>
-        <div class="contact-info-item"><div class="contact-info-label">Métro</div><div class="contact-info-value">Marcel Sembat — Ligne 9</div></div>
-        <div class="contact-info-item"><div class="contact-info-label">Téléphone</div><div class="contact-info-value">09 51 54 84 07</div></div>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- FOOTER -->
 
 <footer>
-  <div class="footer-inner">
-    <div class="footer-logo">Le P'tit Boulogne</div>
-    <div class="footer-links">
-      <a href="#menu">Menu</a>
-      <a href="#horaires">Horaires</a>
-      <a href="#contact">Contact</a>
-    </div>
-    <div class="footer-copy">© 2025 Le P'tit Boulogne · 42 Bd Jean Jaurès, 92100 Boulogne-Billancourt</div>
+  <div class="footer-logo">Le P'tit Boulogne</div>
+  <div class="footer-links">
+    <a href="#menu">Menu</a>
+    <a href="#avis">Avis</a>
+    <a href="#contact">Contact</a>
   </div>
+  <div class="footer-copy">© 2025 Le P'tit Boulogne · 42 Bd Jean Jaurès, 92100 Boulogne-Billancourt</div>
 </footer>
 
 <script>
-const menus = [
+const cartes = [
   [
-    {name:'Deufs durs', desc:'Mayonnaise maison', price:'4,5€'},
-    {name:'Burrata', desc:'Tomates cerises, roquette', price:'9€'},
-    {name:'Assiette de charcuterie', desc:'Sélection du moment', price:'9€'},
-    {name:'Entrée du jour', desc:'Voir l\'ardoise', price:'5€'},
+    {name:"Deufs durs", desc:"Mayonnaise maison", price:"4,5€"},
+    {name:"Burrata", desc:"Tomates cerises, roquette", price:"9€"},
+    {name:"Assiette de charcuterie", desc:"Sélection du moment", price:"9€"},
+    {name:"Entrée du jour", desc:"Voir l'ardoise", price:"5€"},
   ],
   [
-    {name:'Entrecôte black angus 220g', desc:'Cuisson au choix, frites maison', price:'19,9€'},
-    {name:'Pavé de saumon grillé', desc:'Légumes de saison', price:'18€'},
-    {name:'Burger maison', desc:'Pain brioché, frites maison', price:'15€'},
-    {name:'Belle salade césar', desc:'Poulet grillé, parmesan, croûtons', price:'15€'},
-    {name:'Plat du jour', desc:'Voir l\'ardoise', price:'13,9€'},
-    {name:'Planche mixte', desc:'Charcuterie & fromages', price:'16€'},
-    {name:'Tapas mix "X2"', desc:'Sélection de tapas pour deux', price:'25€'},
+    {name:"Entrecôte black angus 220g", desc:"Cuisson au choix, frites maison", price:"19,9€"},
+    {name:"Pavé de saumon grillé", desc:"Légumes de saison", price:"18€"},
+    {name:"Burger maison", desc:"Pain brioché, frites maison", price:"15€"},
+    {name:"Belle salade césar", desc:"Poulet grillé, parmesan, croûtons", price:"15€"},
+    {name:"Plat du jour", desc:"Voir l'ardoise", price:"13,9€"},
+    {name:"Planche mixte", desc:"Charcuterie & fromages", price:"16€"},
+    {name:"Tapas mix \"X2\"", desc:"Sélection de tapas pour deux", price:"25€"},
   ],
   [
-    {name:'Tarte du jour', desc:'Selon arrivage', price:'4€'},
-    {name:'Moelleux chocolat', desc:'Cœur coulant', price:'5€'},
-    {name:'Tarte citron', desc:'Meringuée maison', price:'6€'},
+    {name:"Tarte du jour", desc:"Selon arrivage", price:"4€"},
+    {name:"Moelleux chocolat", desc:"Cœur coulant", price:"5€"},
+    {name:"Tarte citron", desc:"Meringuée maison", price:"6€"},
   ],
   [
-    {name:'Café', desc:'Espresso', price:'2€'},
-    {name:'Coca', desc:'33cl', price:'3€'},
-    {name:'Bière 25cl', desc:'Pression', price:'4€'},
+    {name:"Café", desc:"Espresso", price:"2€"},
+    {name:"Coca", desc:"33cl", price:"3€"},
+    {name:"Bière 25cl", desc:"Pression", price:"4€"},
   ],
 ];
-let current = 0;
-function switchMenu(i, tab) {
-  current = i;
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+let currentCarte = 0;
+function switchCarte(i, tab) {
+  currentCarte = i;
+  document.querySelectorAll('.ctab').forEach(t => t.classList.remove('active'));
   tab.classList.add('active');
-  renderMenu();
+  renderCarte();
 }
-function renderMenu() {
-  document.getElementById('menuList').innerHTML = menus[current].map(item => `
-    <div class="menu-row">
-      <div><div class="menu-name">${item.name}</div><div class="menu-desc">${item.desc}</div></div>
-      <div class="menu-dots"></div>
-      <div class="menu-price">${item.price}</div>
+function renderCarte() {
+  document.getElementById('carteList').innerHTML = cartes[currentCarte].map(item => `
+    <div class="carte-row">
+      <div><div class="carte-name">${item.name}</div><div class="carte-desc">${item.desc}</div></div>
+      <div class="carte-price">${item.price}</div>
     </div>`).join('');
 }
-renderMenu();
+renderCarte();
 
 const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
 }, { threshold: 0.1 });
 document.querySelectorAll('[data-reveal]').forEach(el => obs.observe(el));
 </script>
